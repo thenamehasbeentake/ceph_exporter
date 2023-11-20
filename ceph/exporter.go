@@ -70,13 +70,13 @@ func NewExporter(conn Conn, cluster string, config string, user string, rgwMode 
 
 func (exporter *Exporter) initCollectors() map[string]versionedCollector {
 	standardCollectors := map[string]versionedCollector{
-		"clusterUsage":  NewClusterUsageCollector(exporter),
-		"poolUsage":     NewPoolUsageCollector(exporter),
-		"poolInfo":      NewPoolInfoCollector(exporter),
-		"clusterHealth": NewClusterHealthCollector(exporter),
-		"mon":           NewMonitorCollector(exporter),
-		"osd":           NewOSDCollector(exporter),
-		"crashes":       NewCrashesCollector(exporter),
+		// "clusterUsage":  NewClusterUsageCollector(exporter),
+		"poolUsage": NewPoolUsageCollector(exporter),
+		// "poolInfo":      NewPoolInfoCollector(exporter),
+		// "clusterHealth": NewClusterHealthCollector(exporter),
+		// "mon":           NewMonitorCollector(exporter),
+		// "osd":           NewOSDCollector(exporter),
+		// "crashes":       NewCrashesCollector(exporter),
 	}
 
 	switch exporter.RgwMode {

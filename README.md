@@ -98,7 +98,7 @@ docker build -t digitalocean/ceph_exporter . --build-arg TEST=true --no-cache
 You can start running your `ceph_exporter` container now.
 
 ```bash
-$ docker run -v /etc/ceph:/etc/ceph -p=9128:9128 -it digitalocean/ceph_exporter
+$ docker run -v /etc/ceph:/etc/ceph -p=9097:9128 -it digitalocean/ceph_exporter
 ```
 
 You would have to ensure your image can talk over to the monitors. If it needs
@@ -106,7 +106,7 @@ access to your host's network stack you might need to add `--net=host` to the
 above command. It makes the port mapping redundant so the `-p` flag can be
 removed.
 
-Point your Prometheus to scrape from `:9128` on your host now (or your port
+Point your Prometheus to scrape from `:9097` on your host now (or your port
 of choice if you decide to change it).
 
 ## Contributing

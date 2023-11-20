@@ -16,12 +16,13 @@ package ceph
 
 import (
 	"encoding/json"
+
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/sirupsen/logrus"
 )
 
 const (
-	cephNamespace = "ceph"
+	cephNamespace = "expontech"
 )
 
 // A ClusterUsageCollector is used to gather all the global stats about a
