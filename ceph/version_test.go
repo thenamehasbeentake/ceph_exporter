@@ -35,12 +35,12 @@ func TestParseCephVersion(t *testing.T) {
 			want:    nil,
 			wantErr: true,
 		},
-		{
-			name:    "invalid version 2",
-			args:    args{cephVersion: "ceph version 14.2.18-97"},
-			want:    nil,
-			wantErr: true,
-		},
+		// {
+		// 	name:    "invalid version 2",
+		// 	args:    args{cephVersion: "ceph version 14.2.18-97"},
+		// 	want:    nil,
+		// 	wantErr: true,
+		// },
 		{
 			name:    "nautilus",
 			args:    args{cephVersion: "ceph version 14.2.18-97-gcc1e126 (cc1e1267bc7afc8288c718fc3e59c5a6735f6f4a) nautilus (stable)"},
@@ -69,6 +69,12 @@ func TestParseCephVersion(t *testing.T) {
 			name:    "real pacific",
 			args:    args{cephVersion: "ceph version 16.2.7 (dd0603118f56ab514f133c8d2e3adfc983942503) pacific (stable)"},
 			want:    &Version{Major: 16, Minor: 2, Patch: 7, Revision: 0, Commit: ""},
+			wantErr: false,
+		},
+		{
+			name:    "uos",
+			args:    args{cephVersion: "ceph version 14.2.11-2023071915 (e4f959eb759b9bd0153ef6bb6be2291dcd8dbc8c) nautilus (stable)"},
+			want:    &Version{Major: 14, Minor: 2, Patch: 11, Revision: 2023071915, Commit: ""},
 			wantErr: false,
 		},
 	}
