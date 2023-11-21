@@ -119,6 +119,7 @@ func main() {
 		}
 	}
 
+	r := prometheus.NewRegistry()
 	for _, cluster := range clusterConfigs {
 		conn, err := rados.NewRadosConn(
 			cluster.User,
@@ -131,7 +132,7 @@ func main() {
 			continue
 		}
 
-		prometheus.MustRegister(ceph.NewExporter(
+		r.MustRegister(ceph.NewExporter(
 			conn,
 			cluster.ClusterLabel,
 			cluster.ConfigFile,
@@ -142,7 +143,8 @@ func main() {
 		logger.WithField("cluster", cluster.ClusterLabel).Info("exporting cluster")
 	}
 
-	http.Handle(*metricsPath, promhttp.Handler())
+	handler := promhttp.HandlerFor(r, promhttp.HandlerOpts{})
+	http.Handle(*metricsPath, handler)
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(`<html>
 			<head><title>Ceph Exporter</title></head>
